@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Diario Personal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mi Diario Personal</h1>
+            <div class="export-import-controls">
+                <button class="btn" onclick="exportDiary()">📥 Exportar</button>
+                <input type="file" id="importInput" accept=".json" style="display: none;" onchange="importDiary(event)">
+                <button class="btn" onclick="document.getElementById('importInput').click()">📤 Importar</button>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Buscar en el diario..." 
+                id="searchInput"
+                onkeyup="searchEntries()"
+            >
+        </div>
+
+        <div class="new-entry">
+            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                <input 
+                    type="color" 
+                    class="entry-color-picker" 
+                    id="entryColor" 
+                    value="#4A90E2"
+                    title="Elige un color para esta entrada"
+                >
+                <input type="text" class="entry-title" placeholder="Título de la entrada..." id="entryTitle">
+            </div>
+
+            <textarea class="entry-content" placeholder="¿Qué hay en tu mente hoy?" id="entryContent"></textarea>
+            
+            <div class="media-controls">
+                <input type="file" id="imageInput" accept="image/*" multiple style="display: none">
+                <button class="btn" onclick="document.getElementById('imageInput').click()">📷 Agregar Imágenes</button>
+                <button class="btn" id="recordButton">🎤 Grabar Audio</button>
+                <button class="btn" id="toggleDrawing">✏️ Hacer un Dibujo</button>
+                <div id="recordingStatus"></div>
+            </div>
+
+            <div class="media-preview" id="mediaPreview"></div>
+
+            <div class="canvas-container" style="display: none;">
+                <div class="drawing-controls">
+                    <input type="color" class="color-picker" id="colorPicker" value="#000000">
+                    <input type="range" id="brushSize" min="1" max="20" value="5">
+                    <button class="btn" onclick="clearCanvas()">Limpiar</button>
+                </div>
+                <canvas id="drawingCanvas" width="700" height="400"></canvas>
+            </div>
+
+            <button class="btn" onclick="addEntry()">Guardar Entrada</button>
+        </div>
+
+        <div id="entriesList" class="entries-list">
+            <!-- Las entradas se agregarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
